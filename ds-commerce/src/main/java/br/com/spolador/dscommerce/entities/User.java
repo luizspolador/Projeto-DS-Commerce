@@ -1,9 +1,9 @@
 package br.com.spolador.dscommerce.entities;
 
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 

@@ -1,6 +1,6 @@
 package br.com.spolador.dscommerce.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.Objects;
 

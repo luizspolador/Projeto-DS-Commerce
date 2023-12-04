@@ -5,6 +5,7 @@ import br.com.spolador.dscommerce.entities.Product;
 import br.com.spolador.dscommerce.repositories.ProductRepository;
 import br.com.spolador.dscommerce.services.exceptions.DatabaseException;
 import br.com.spolador.dscommerce.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -12,8 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityNotFoundException;
 
 @Service
 public class ProductService {

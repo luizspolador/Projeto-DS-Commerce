@@ -1,10 +1,7 @@
 package br.com.spolador.dscommerce.dto;
 
 import br.com.spolador.dscommerce.entities.Product;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class ProductDto {
 
