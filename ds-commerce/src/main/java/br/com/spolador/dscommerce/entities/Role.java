@@ -2,7 +2,7 @@ package br.com.spolador.dscommerce.entities;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
