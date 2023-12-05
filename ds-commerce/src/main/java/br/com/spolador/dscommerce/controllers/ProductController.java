@@ -35,7 +35,7 @@ public class ProductController {
         return ResponseEntity.ok(dto); // retorna 200
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<ProductDto> insert(@Valid @RequestBody ProductDto dto){
         dto = productService.insert(dto);
@@ -43,14 +43,14 @@ public class ProductController {
         return ResponseEntity.created(uri).body(dto); // retorna 201
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<ProductDto> update(@PathVariable Long id, @Valid @RequestBody ProductDto dto){
         dto = productService.update(id, dto);
         return ResponseEntity.ok(dto); // retorna 200
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id){
        productService.deleteById(id);

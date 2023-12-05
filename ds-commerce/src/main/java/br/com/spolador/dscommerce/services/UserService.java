@@ -27,7 +27,7 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         List<UserDetailsProjection> result = repository.searchUserAndRolesByEmail(username);
-        if (result.isEmpty()) {
+        if (result.size() == 0) {
             throw new UsernameNotFoundException("Email not found");
         }
 
@@ -41,20 +41,21 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    protected User authenticated(){
+    protected User authenticated() {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             Jwt jwtPrincipal = (Jwt) authentication.getPrincipal();
             String username = jwtPrincipal.getClaim("username");
             return repository.findByEmail(username).get();
-        } catch (Exception e){
-            throw new UsernameNotFoundException("Email not found");
+        }
+        catch (Exception e) {
+            throw new UsernameNotFoundException("Invalid user");
         }
     }
 
     @Transactional(readOnly = true)
-    public UserDto getMe(){
-        User user = authenticated();
-        return new UserDto(user);
+    public UserDto getMe() {
+        User entity = authenticated();
+        return new UserDto(entity);
     }
 }
