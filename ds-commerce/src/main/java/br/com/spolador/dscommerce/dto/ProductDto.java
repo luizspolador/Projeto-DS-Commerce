@@ -1,7 +1,11 @@
 package br.com.spolador.dscommerce.dto;
 
+import br.com.spolador.dscommerce.entities.Category;
 import br.com.spolador.dscommerce.entities.Product;
 import jakarta.validation.constraints.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDto {
 
@@ -15,6 +19,9 @@ public class ProductDto {
     @Positive(message = "O preço deve ser positivo")
     private Double price;
     private String imgUrl;
+
+    @NotEmpty(message = "Deve ter pelo menos 1 categoria")
+    private List<CategoryDto> categories = new ArrayList<>();
 
     public ProductDto(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
@@ -31,6 +38,9 @@ public class ProductDto {
         description = entity.getDescription();
         price = entity.getPrice();
         imgUrl = entity.getImgUrl();
+        for(Category cat : entity.getCategories()){
+            categories.add(new CategoryDto(cat));
+        }
     }
 
     public Long getId() {
@@ -51,5 +61,9 @@ public class ProductDto {
 
     public String getImgUrl() {
         return imgUrl;
+    }
+
+    public List<CategoryDto> getCategories() {
+        return categories;
     }
 }
