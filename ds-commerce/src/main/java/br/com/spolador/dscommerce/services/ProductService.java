@@ -1,6 +1,7 @@
 package br.com.spolador.dscommerce.services;
 
 import br.com.spolador.dscommerce.dto.ProductDto;
+import br.com.spolador.dscommerce.dto.ProductMinDto;
 import br.com.spolador.dscommerce.entities.Product;
 import br.com.spolador.dscommerce.repositories.ProductRepository;
 import br.com.spolador.dscommerce.services.exceptions.DatabaseException;
@@ -28,9 +29,9 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ProductDto> findAll(String name, Pageable pageable){
+    public Page<ProductMinDto> findAll(String name, Pageable pageable){
         Page<Product> products = productRepository.searchByName(name, pageable);
-        return products.map(x -> new ProductDto(x));
+        return products.map(x -> new ProductMinDto(x));
     }
 
     @Transactional
