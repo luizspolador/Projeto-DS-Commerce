@@ -1,7 +1,9 @@
 package br.com.spolador.dscommerce.services;
 
+import br.com.spolador.dscommerce.dto.CategoryDto;
 import br.com.spolador.dscommerce.dto.ProductDto;
 import br.com.spolador.dscommerce.dto.ProductMinDto;
+import br.com.spolador.dscommerce.entities.Category;
 import br.com.spolador.dscommerce.entities.Product;
 import br.com.spolador.dscommerce.repositories.ProductRepository;
 import br.com.spolador.dscommerce.services.exceptions.DatabaseException;
@@ -73,6 +75,13 @@ public class ProductService {
         entity.setDescription(dto.getDescription());
         entity.setPrice(dto.getPrice());
         entity.setImgUrl(dto.getImgUrl());
+
+        entity.getCategories().clear();
+        for(CategoryDto catDto : dto.getCategories()){
+            Category cat = new Category();
+            cat.setId(catDto.getId());
+            entity.getCategories().add(cat);
+        }
     }
 
 }
