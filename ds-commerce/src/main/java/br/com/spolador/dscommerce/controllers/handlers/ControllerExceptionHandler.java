@@ -3,6 +3,7 @@ package br.com.spolador.dscommerce.controllers.handlers;
 import br.com.spolador.dscommerce.dto.CustomError;
 import br.com.spolador.dscommerce.dto.ValidationError;
 import br.com.spolador.dscommerce.services.exceptions.DatabaseException;
+import br.com.spolador.dscommerce.services.exceptions.ForbiddenException;
 import br.com.spolador.dscommerce.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,13 @@ public class ControllerExceptionHandler {
             err.addError(f.getField(), f.getDefaultMessage());
         }
 
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<CustomError> forbidden (ForbiddenException e, HttpServletRequest request){
+        HttpStatus status = HttpStatus.FORBIDDEN; // erro 403
+        CustomError err = new CustomError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());  // .value passa para inteiro
         return ResponseEntity.status(status).body(err);
     }
 
