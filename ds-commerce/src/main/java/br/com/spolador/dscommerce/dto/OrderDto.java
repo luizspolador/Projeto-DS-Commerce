@@ -3,6 +3,7 @@ package br.com.spolador.dscommerce.dto;
 import br.com.spolador.dscommerce.entities.Order;
 import br.com.spolador.dscommerce.entities.OrderItem;
 import br.com.spolador.dscommerce.entities.OrderStatus;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class OrderDto {
     private OrderStatus status;
     private ClientDto client;
     private PaymentDto payment;
+    @NotEmpty(message = "Deve ter pelo menos um item")
     private List<OrderItemDto> items = new ArrayList<>();
 
     public OrderDto(Long id, Instant moment, OrderStatus status, ClientDto client, PaymentDto payment) {
